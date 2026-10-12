@@ -4,7 +4,7 @@
 [![CI](https://github.com/Raj-128/dlt-error-codes/actions/workflows/ci.yml/badge.svg)](https://github.com/Raj-128/dlt-error-codes/actions/workflows/ci.yml)
 [![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/Raj-128/dlt-error-codes/blob/main/package.json)
 [![unpacked size](https://img.shields.io/npm/unpacked-size/dlt-error-codes)](https://www.npmjs.com/package/dlt-error-codes?activeTab=code)
-[![licence](https://img.shields.io/npm/l/dlt-error-codes?color=blue)](LICENSE)
+[![licence](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
 [![downloads](https://img.shields.io/npm/dm/dlt-error-codes?color=blue)](https://www.npmjs.com/package/dlt-error-codes)
 
 **Your SMS said "sent" but never arrived. The delivery report says `635`. Here is what that means and how to fix it.**
