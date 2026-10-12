@@ -1,0 +1,55 @@
+{
+  "name": "dlt-error-codes",
+  "version": "0.1.0",
+  "description": "Plain-English explanations and fixes for Indian DLT / TRAI SMS error codes. Every entry cites its source and says whether it was reproduced first-hand. Zero dependencies.",
+  "keywords": [
+    "dlt",
+    "trai",
+    "sms",
+    "otp",
+    "india",
+    "dlt-error",
+    "template-mismatch",
+    "sms-gateway",
+    "scrubbing"
+  ],
+  "license": "MIT",
+  "author": "Raj Patil",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./data": "./data/codes.json"
+  },
+  "types": "./src/index.d.ts",
+  "bin": {
+    "dlt-error-codes": "./src/cli.js"
+  },
+  "files": [
+    "src",
+    "data"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raj-128/dlt-error-codes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Raj-128/dlt-error-codes/issues"
+  },
+  "homepage": "https://github.com/Raj-128/dlt-error-codes#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "leak-check": "node scripts/leak-check.mjs",
+    "pretest": "npm run leak-check",
+    "test": "node --test"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

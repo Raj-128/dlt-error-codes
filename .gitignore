@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# build artefacts
+*.tgz
+
+# secrets and local config - never commit any of these
+.env
+.env.*
+*.pem
+*.key
+*.p8
+*.p12
+*.keystore
+*.jks
+secrets.json
+credentials.json
+.npmrc
+*.local.json
+
+# editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# logs
+npm-debug.log*
+yarn-error.log*

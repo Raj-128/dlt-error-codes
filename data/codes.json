@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "lastReviewed": "2026-10-12",
+  "confidenceLevels": {
+    "verified": "Reproduced first-hand. The gateway, DLT operator and date are recorded in verifiedOn.",
+    "reported": "Taken from vendor or provider documentation. Not reproduced by a maintainer. Sources listed.",
+    "unconfirmed": "Seen in forums or support threads without corroboration. Treat with suspicion."
+  },
+  "entries": [
+    {
+      "id": "635",
+      "code": "635",
+      "label": "TEMPLATE_VARIABLE_EXCEEDED_MAX_LENGTH",
+      "category": "template",
+      "meaning": "A variable in your message was longer than the length registered for that variable position in the approved DLT template.",
+      "fix": "Open the template in the DLT portal and read the length registered for that variable. Shorten the value you are inserting, or re-register the template with a longer variable. Do not assume a fixed limit such as 30 characters; it is set per template.",
+      "whenItBites": "Usually in production rather than testing, because test data is short. A long customer name or a long order reference overflows a variable that worked for every short test value.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://smsgatewayhub.freshdesk.com/support/solutions/articles/3000129776-dlt-sms-error-codes-latest-india-2025",
+        "https://fivosms.co.uk/dlt-sms-error-codes.php"
+      ]
+    },
+    {
+      "id": "634",
+      "code": "634",
+      "label": "HEADER_NOT_LINKED_TO_TEMPLATE",
+      "category": "linkage",
+      "meaning": "The sender header you submitted is not linked to the DLT template you submitted. Both exist, but they are not associated with each other on the DLT platform.",
+      "fix": "In the DLT portal, open the template and confirm which header it is registered against. Send with that exact header, or add the header to the template's allowed list and wait for the change to propagate.",
+      "whenItBites": "After adding a second sender header, or after reusing a template across two brands.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://smsgatewayhub.freshdesk.com/support/solutions/articles/3000129776-dlt-sms-error-codes-latest-india-2025",
+        "https://www.smsgatewaycenter.com/blog/dlt-registration-step-by-step-guide-india/"
+      ]
+    },
+    {
+      "id": "template-mismatch",
+      "code": null,
+      "label": "TEMPLATE_MISMATCH",
+      "category": "template",
+      "meaning": "The operator compared the text you sent against the registered template and they did not match, so the message was dropped during scrubbing. The comparison is exact outside the variable positions.",
+      "fix": "Diff the rendered message against the registered template character by character. An extra space, a changed comma, a different dash, a stray newline or a smart quote is enough to reject it. Pay attention to whitespace introduced by string concatenation or template literals.",
+      "whenItBites": "Any time the message text is assembled in code rather than copied verbatim from the portal.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://kb.smsalert.co.in/knowledgebase/template-mismatch-error/",
+        "https://www.fast2sms.com/help/sms-not-delivered-dlt-errors/",
+        "https://dev.to/saipraveen446/dlt-business-sms-sending-in-india-a-developers-guide-1ikm"
+      ]
+    },
+    {
+      "id": "template-id-mismatch",
+      "code": null,
+      "label": "TEMPLATE_ID_DOES_NOT_MATCH_CONTENT",
+      "category": "template",
+      "meaning": "The template ID you passed is valid, but it does not correspond to the text you sent. The ID points at a different registered template.",
+      "fix": "Confirm the template ID belongs to the exact text being sent. Keep the ID and the text together in one place in your code so they cannot drift apart.",
+      "whenItBites": "After editing message copy without updating the ID, or after copying an integration between two templates.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://www.msgclub.net/learn/sms-status-show-dlt-error-and-not-received-on-handset.html",
+        "https://www.twilio.com/docs/api/errors/21901"
+      ]
+    },
+    {
+      "id": "wrong-template-category",
+      "code": null,
+      "label": "WRONG_TEMPLATE_CATEGORY",
+      "category": "registration",
+      "meaning": "The template was registered under a category you are not entitled to use. The Transactional category is reserved for banks; a non-bank sending OTPs under it will not deliver.",
+      "fix": "Non-banks should register OTP and alert templates as Service Implicit. Re-register under the correct category and wait for approval again.",
+      "whenItBites": "At first launch. The word 'transactional' reads like the obvious choice for an OTP, so this is a very common first mistake, and it costs another approval cycle to undo.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://dev.to/saipraveen446/dlt-business-sms-sending-in-india-a-developers-guide-1ikm"
+      ]
+    },
+    {
+      "id": "header-not-bound-to-telemarketer",
+      "code": null,
+      "label": "HEADER_NOT_BOUND_TO_TELEMARKETER",
+      "category": "linkage",
+      "meaning": "The header is registered to your entity, but it is not bound to the telemarketer or gateway that is actually submitting the traffic.",
+      "fix": "Add your gateway's telemarketer ID against the header in the DLT portal. If you switch gateways, this binding must be repeated for the new one.",
+      "whenItBites": "After changing SMS provider while keeping the same header.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://www.smsgatewaycenter.com/blog/dlt-registration-step-by-step-guide-india/",
+        "https://smsgatewayhub.freshdesk.com/support/solutions/articles/3000129776-dlt-sms-error-codes-latest-india-2025"
+      ]
+    },
+    {
+      "id": "template-not-approved",
+      "code": null,
+      "label": "TEMPLATE_PENDING_OR_REJECTED",
+      "category": "registration",
+      "meaning": "The template has not been approved yet, or it was rejected. Approval is not instant.",
+      "fix": "Check the template status in the DLT portal. Approval commonly takes 24 to 48 hours. Build the integration against a template you have already had approved, and treat registration as a lead-time item in the project plan, not a last step before launch.",
+      "whenItBites": "On launch day, when the integration is finished but the template is still queued.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://www.fast2sms.com/help/?p=17186",
+        "https://www.ojiva.ai/blogs/dlt-registration-bulk-sms-india/"
+      ]
+    },
+    {
+      "id": "silent-scrubbing-failure",
+      "code": null,
+      "label": "SILENT_SCRUBBING_FAILURE",
+      "category": "diagnosis",
+      "meaning": "The send returned a success-looking response from the gateway, but the message never arrived and the delivery report shows a failure with no obvious cause. This is almost always a DLT scrubbing rejection at the operator, not a network problem.",
+      "fix": "Pull the delivery report and read the DLT error code from it. The gateway's HTTP response only tells you the request was accepted; the scrubbing verdict arrives later in the DLR. Log the DLR code for every send, or you will have nothing to debug with.",
+      "whenItBites": "Any integration that logs the API response but not the delivery report.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://www.ojiva.ai/blogs/dlt-registration-bulk-sms-india/",
+        "https://www.fast2sms.com/help/sms-not-delivered-dlt-errors/"
+      ]
+    },
+    {
+      "id": "network-level-scrubbing",
+      "code": null,
+      "label": "NETWORK_LEVEL_SCRUBBING",
+      "category": "diagnosis",
+      "meaning": "Template matching happens in real time at the operator network, after your gateway has accepted the message. Your own code and your gateway can both be correct and the message can still be dropped.",
+      "fix": "Validate the rendered message against the registered template before calling the gateway. Catching the mismatch locally costs nothing; catching it from a delivery report costs a credit and a round trip.",
+      "whenItBites": "Continuously, in any system that assembles message text dynamically.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://www.telerivet.com/blog/india-sms-compliance-trai-dlt-registration-and-tcccpr-guide"
+      ]
+    },
+    {
+      "id": "gateway-otp-endpoint-alternative",
+      "code": null,
+      "label": "CONSIDER_GATEWAY_OTP_ENDPOINT",
+      "category": "design",
+      "meaning": "Not an error. If all you need is a login OTP, some gateways expose an OTP endpoint that generates, expires and verifies the code server-side against their own pre-approved template, so you never manage template text at all.",
+      "fix": "Before building template handling, check whether your gateway's OTP endpoint covers your use case. It removes this entire class of bug. Manage templates yourself only when you need custom message content.",
+      "whenItBites": "Not a failure. Worth knowing before investing in template plumbing.",
+      "confidence": "reported",
+      "verifiedOn": null,
+      "sources": [
+        "https://www.fast2sms.com/help/?p=17186"
+      ]
+    }
+  ]
+}

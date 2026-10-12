@@ -1,0 +1,7 @@
+# Normalise everything to LF in the repository and on checkout.
+#
+# src/cli.js starts with a `#!/usr/bin/env node` shebang. If that line ends
+# with CRLF, the interpreter path becomes "node\r" and `npx dlt-error-codes`
+# fails with "bad interpreter" on macOS and Linux. Forcing LF prevents a
+# Windows checkout from ever publishing a broken executable.
+* text=auto eol=lf
