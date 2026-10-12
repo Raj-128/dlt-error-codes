@@ -25,7 +25,7 @@
   },
   "types": "./src/index.d.ts",
   "bin": {
-    "dlt-error-codes": "./src/cli.js"
+    "dlt-error-codes": "src/cli.js"
   },
   "files": [
     "src",
