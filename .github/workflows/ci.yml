@@ -34,10 +34,13 @@ jobs:
         run: npm run leak-check
       - name: package must contain only src and data
         run: npm pack --dry-run
+      # .github is excluded because this step's own grep pattern contains the
+      # placeholder strings; without the exclusion the check always matches
+      # itself and can never pass.
       - name: no placeholders left unfilled
         run: |
           if grep -rn "YOUR_GITHUB_USERNAME\|YOUR NAME HERE\|YOUR FULL LEGAL NAME\|YOUR_EMAIL_HERE" \
-               --exclude-dir=node_modules --exclude-dir=.git .; then
+               --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=.github .; then
             echo "::error::Placeholder text still present - fill these in before release"
             exit 1
           fi
