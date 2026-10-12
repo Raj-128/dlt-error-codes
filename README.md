@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/dlt-error-codes?color=cb3837&logo=npm)](https://www.npmjs.com/package/dlt-error-codes)
 [![CI](https://github.com/Raj-128/dlt-error-codes/actions/workflows/ci.yml/badge.svg)](https://github.com/Raj-128/dlt-error-codes/actions/workflows/ci.yml)
 [![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/Raj-128/dlt-error-codes/blob/main/package.json)
-[![install size](https://img.shields.io/bundlephobia/min/dlt-error-codes)](https://bundlephobia.com/package/dlt-error-codes)
+[![unpacked size](https://img.shields.io/npm/unpacked-size/dlt-error-codes)](https://www.npmjs.com/package/dlt-error-codes?activeTab=code)
 [![licence](https://img.shields.io/npm/l/dlt-error-codes?color=blue)](LICENSE)
 [![downloads](https://img.shields.io/npm/dm/dlt-error-codes?color=blue)](https://www.npmjs.com/package/dlt-error-codes)
 
