@@ -1,6 +1,6 @@
 {
   "name": "dlt-error-codes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Plain-English explanations and fixes for Indian DLT / TRAI SMS error codes. Every entry cites its source and says whether it was reproduced first-hand. Zero dependencies.",
   "keywords": [
     "dlt",
