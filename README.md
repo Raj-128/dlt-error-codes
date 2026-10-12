@@ -209,7 +209,7 @@ An entry claiming `verified` without a `verifiedOn` value fails the test suite.
 - MIT licensed
 - **Zero dependencies**
 - **No install scripts**, no network calls, no telemetry
-- Published from CI with [npm provenance](https://docs.npmjs.com/generating-provenance-statements) — every release links to the exact source commit
+- Published from CI with [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/) (OIDC) — no long-lived token exists for this package, and every release from `0.1.1` onward carries a provenance statement linking it to the exact source commit
 - Small enough to audit by hand. One JSON file and about 70 lines of lookup:
   ```bash
   npm pack dlt-error-codes --dry-run

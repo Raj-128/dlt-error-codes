@@ -1,11 +1,24 @@
-# Publishes to npm with provenance when you push a version tag.
+# Publishes to npm when you push a version tag.
 #
-#   npm version patch    # or minor / major — this creates the tag
+#   npm version patch    # or minor / major - this creates the tag
 #   git push --follow-tags
 #
-# Requires a repository secret named NPM_TOKEN: an npm automation token
-# (npmjs.com -> Access Tokens -> Generate -> Automation).
-# Provenance requires a public repository and id-token: write.
+# Authentication is npm Trusted Publishing (OIDC). There is NO token and no
+# NPM_TOKEN secret: npm verifies the request came from this exact repository
+# and workflow via GitHub's OIDC provider, and issues a short-lived credential
+# for that one publish.
+#
+# One-time setup, after the package exists on npm:
+#   npmjs.com -> the package -> Settings -> Trusted Publisher
+#   Provider:   GitHub Actions
+#   Repository: Raj-128/dlt-error-codes
+#   Workflow:   publish.yml
+#
+# A trusted publisher can only be attached to a package that already exists,
+# so version 0.1.0 is published once by hand from a laptop with 2FA. Every
+# release after that goes through here.
+#
+# Provenance is generated automatically for trusted-publisher releases.
 
 name: Publish
 
@@ -18,14 +31,24 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # required for npm provenance
+      id-token: write # required for OIDC and provenance
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
-      - run: npm test
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Trusted publishing needs npm >= 11.5.1; the bundled npm may be older.
+      - name: Use an npm that supports trusted publishing
+        run: npm install -g npm@latest
+
+      - name: Show versions
+        run: node -v && npm -v
+
+      - name: Leak check and tests
+        run: npm test
+
+      - name: Publish
+        run: npm publish --access public
